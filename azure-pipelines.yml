@@ -1,0 +1,41 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+stages:
+- stage: build
+  displayName: Build
+  jobs:
+  - job: Build
+    # pool:
+    #   name: Default
+    steps:
+      - task: Maven@3
+      # - task: LambdatestResults@1
+
+- stage: Release
+  displayName: Release
+  jobs:
+  - job: Release
+    # pool:
+    #   name: Default
+    steps:               
+      - task: Maven@3
+      # - task: LambdatestResults@1
+
+- stage: Quilter
+  displayName: Quilter
+  jobs:
+  - job: Quilter
+    # pool:
+    #   name: Default
+    steps:               
+      # - task: Maven@3
+      - task: LambdatestResults@1
