@@ -7,7 +7,8 @@ trigger:
 - master
 
 pool:
-  vmImage: windows-latest
+  MylocalPool
+  #vmImage: windows-latest
 
 stages:
 - stage: build
