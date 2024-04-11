@@ -44,7 +44,7 @@ public class TestNGTodo1 {
         System.out.println("---------------u----" + username);
         System.out.println("---------aaa----" + authkey);
         System.out.println("========================================");
-        driver = new RemoteWebDriver(new URL("https://" + username + ":" + authkey + hub), caps);
+        driver = new RemoteWebDriver(new URL("https://" + "sunilr" + ":" + "LtQPqIWXiN4kHjRSQ9juzDmQZV7tpbssbvyEJ13JPS4QfhGduU" + hub), caps);
 
     }
 
