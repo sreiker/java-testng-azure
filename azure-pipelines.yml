@@ -1,42 +1,72 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
-- master
+- main
 
 pool:
   MylocalPool
-  #vmImage: windows-latest
+  #vmImage: ubuntu-latest
 
 stages:
-- stage: build
-  displayName: Build
+- stage: BuildAndTest
   jobs:
-  - job: Build
-    # pool:
-    #   name: Default
+  - job: BuildAndTestJob
     steps:
-      - task: Maven@3
-      # - task: LambdatestResults@1
-
-- stage: Release
-  displayName: Release
-  jobs:
-  - job: Release
-    # pool:
-    #   name: Default
-    steps:               
-      - task: Maven@3
-      # - task: LambdatestResults@1
-
-- stage: Quilter
-  displayName: Quilter
-  jobs:
-  - job: Quilter
-    # pool:
-    #   name: Default
-    steps:               
-      # - task: Maven@3
+      - task: configuration@1
+        inputs:
+            connection: sunil-test
+            isTunnelActivate: false
+      
+      - script: |
+          mvn clean install -DskipTests
+      - script: "mvn test -D suite=single.xml"
+        displayName: "Command Line Script"
       - task: LambdatestResults@1
+        
+- stage: LambdatestResults
+  jobs:
+  - job: LambdatestResultsJob
+    steps:
+      - script: |
+          echo "Hello"
+
+# # Maven
+# # Build your Java project and run tests with Apache Maven.
+# # Add steps that analyze code, save build artifacts, deploy, and more:
+# # https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+# trigger:
+# - master
+
+# pool:
+#   MylocalPool
+#   #vmImage: windows-latest
+
+# stages:
+# - stage: build
+#   displayName: Build
+#   jobs:
+#   - job: Build
+#     # pool:
+#     #   name: Default
+#     steps:
+#       - task: Maven@3
+#       # - task: LambdatestResults@1
+
+# - stage: Release
+#   displayName: Release
+#   jobs:
+#   - job: Release
+#     # pool:
+#     #   name: Default
+#     steps:               
+#       - task: Maven@3
+#       # - task: LambdatestResults@1
+
+# - stage: Quilter
+#   displayName: Quilter
+#   jobs:
+#   - job: Quilter
+#     # pool:
+#     #   name: Default
+#     steps:               
+#       # - task: Maven@3
+#       - task: LambdatestResults@1
