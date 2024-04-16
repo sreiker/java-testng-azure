@@ -2,7 +2,8 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  MylocalPool
+  #vmImage: ubuntu-latest
 
 stages:
 - stage: BuildAndTest
