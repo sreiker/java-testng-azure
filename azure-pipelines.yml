@@ -13,7 +13,7 @@ stages:
       - task: configuration@1
         inputs:
             connection: sunil-test
-            isTunnelActivate: false
+            isTunnelActivate: true
       
       - script: |
           mvn clean install -DskipTests
